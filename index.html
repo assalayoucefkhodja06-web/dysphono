@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dysphono | Plateforme Professionnelle de Traitement de la Dysphonie</title>
+    <meta name="description" content="Solution multicompétence pour le diagnostic et le traitement professionnel de la dysphonie. Orthophonie, ORL et rééducation vocale.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            300: '#7cc7fb',
+                            400: '#38a8f8',
+                            500: '#0e8ce4',
+                            600: '#026fc7',
+                            700: '#0358a1',
+                            800: '#074b85',
+                            900: '#0c406e',
+                        },
+                        accent: '#6366f1',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(14, 140, 228, 0.1), transparent);
+        }
+
+        .wave-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: linear-gradient(to top, #0e8ce4, #6366f1);
+            border-radius: 4px;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 80%; }
+        }
+
+        .stagger-card { opacity: 0; transform: translateY(20px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans selection:bg-primary-200 selection:text-primary-900">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 glass">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="p-2 bg-primary-600 rounded-lg">
+                    <i data-lucide="mic-2" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent">
+                    Dysphono
+                </span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#services" class="text-sm font-medium hover:text-primary-600 transition-colors">Services</a>
+                <a href="#expertise" class="text-sm font-medium hover:text-primary-600 transition-colors">Expertise</a>
+                <a href="#about" class="text-sm font-medium hover:text-primary-600 transition-colors">À propos</a>
+                <a href="login.html" class="px-5 py-2.5 bg-primary-600 text-white rounded-full text-sm font-semibold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 hover:-translate-y-0.5 inline-block">
+                    Portail Praticien
+                </a>
+            </div>
+            
+            <button class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 px-6 hero-gradient overflow-hidden">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                <div id="hero-content">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-bold uppercase tracking-wider mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                        </span>
+                        Plateforme Multicompétence
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-display font-bold leading-[1.1] mb-6">
+                        Retrouvez la puissance de <span class="text-primary-600">votre voix</span>.
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-10 max-w-xl leading-relaxed">
+                        Une approche intégrée et professionnelle pour le traitement de la dysphonie. Connectez-vous à un réseau d'experts en ORL, orthophonie et rééducation vocale.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="login.html" class="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all flex items-center gap-2 group shadow-xl inline-flex">
+                            Commencer un diagnostic
+                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <button class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-all">
+                            Voir nos solutions
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative lg:ml-12" id="hero-visual">
+                    <div class="glass p-8 rounded-[2rem] shadow-2xl relative z-10">
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <h3 class="font-display font-bold text-xl">Analyse Vocale Temps Réel</h3>
+                                <p class="text-sm text-slate-500">Fréquence & Intensité</p>
+                            </div>
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
+                                <i data-lucide="activity" class="text-primary-600"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="wave-container mb-8">
+                            <div class="wave-bar" style="animation-delay: 0.1s; height: 40%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.3s; height: 60%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.2s; height: 30%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.5s; height: 90%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.4s; height: 50%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.7s; height: 75%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.6s; height: 40%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.9s; height: 60%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.8s; height: 30%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.2s; height: 80%"></div>
+                            <div class="wave-bar" style="animation-delay: 0.4s; height: 50%"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="text-xs text-slate-500 block mb-1">Qualité</span>
+                                <span class="text-lg font-bold text-green-600">92% Optimal</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="text-xs text-slate-500 block mb-1">Stabilité</span>
+                                <span class="text-lg font-bold text-primary-600">Stable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decor elements -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 px-6 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <h2 class="text-4xl font-display font-bold mb-4">Une expertise multicompétence</h2>
+                    <p class="text-slate-500 text-lg">
+                        Dysphono centralise les meilleurs outils et professionnels pour une prise en charge globale de vos troubles vocaux.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="stagger-card p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="stethoscope" class="text-blue-600 w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Diagnostic ORL</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Examens cliniques approfondis et vidéostroboscopie pour identifier l'origine physiologique du trouble.
+                        </p>
+                        <a href="#" class="text-blue-600 font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                            En savoir plus <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="stagger-card p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="transition-delay: 0.1s">
+                        <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="brain" class="text-indigo-600 w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Orthophonie</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Rééducation personnalisée et exercices ciblés pour optimiser le geste vocal et réduire la fatigue.
+                        </p>
+                        <a href="#" class="text-indigo-600 font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                            En savoir plus <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="stagger-card p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="transition-delay: 0.2s">
+                        <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="users" class="text-purple-600 w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Accompagnement</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Suivi psychologique et gestion du stress pour aborder les aspects émotionnels liés à la perte de voix.
+                        </p>
+                        <a href="#" class="text-purple-600 font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                            En savoir plus <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 px-6">
+            <div class="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-primary-600 to-accent p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl">
+                <div class="relative z-10">
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6">Prêt à libérer votre voix ?</h2>
+                    <p class="text-primary-100 text-lg mb-10 max-w-2xl mx-auto">
+                        Rejoignez les centaines de professionnels et patients qui utilisent Dysphono pour une rééducation efficace.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="login.html" class="px-8 py-4 bg-white text-primary-600 rounded-2xl font-bold hover:bg-primary-50 transition-all shadow-lg inline-block">
+                            Créer un compte patient
+                        </a>
+                        <button class="px-8 py-4 bg-primary-500/20 text-white border border-white/30 rounded-2xl font-bold hover:bg-primary-500/30 transition-all">
+                            Contacter un expert
+                        </button>
+                    </div>
+                </div>
+                <!-- Decor -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="p-1.5 bg-primary-600 rounded-md">
+                    <i data-lucide="mic-2" class="text-white w-4 h-4"></i>
+                </div>
+                <span class="text-xl font-display font-bold text-white">
+                    Dysphono
+                </span>
+            </div>
+            <div class="flex gap-8 text-sm">
+                <a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a>
+                <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
+                <a href="#" class="hover:text-white transition-colors">Support</a>
+            </div>
+            <p class="text-sm">© 2024 Dysphono. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        gsap.from("#hero-content > *", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        gsap.from("#hero-visual", {
+            x: 50,
+            opacity: 0,
+            duration: 1.2,
+            delay: 0.5,
+            ease: "power3.out"
+        });
+
+        // Scroll animations for cards
+        gsap.to(".stagger-card", {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: "#services",
+                start: "top 80%",
+            }
+        });
+    </script>
+</body>
+</html>

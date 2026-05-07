@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dysphono | Configuration du Profil</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f7ff', 100: '#e0effe', 200: '#bae0fd', 300: '#7cc7fb',
+                            400: '#38a8f8', 500: '#0e8ce4', 600: '#026fc7', 700: '#0358a1',
+                            800: '#074b85', 900: '#0c406e',
+                        },
+                        accent: '#6366f1',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent),
+                radial-gradient(circle at bottom left, rgba(14, 140, 228, 0.1), transparent);
+        }
+
+        .step-card {
+            opacity: 0;
+            transform: scale(0.95);
+            display: none;
+        }
+
+        .step-card.active {
+            opacity: 1;
+            transform: scale(1);
+            display: block;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #0e8ce4;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen p-6 hero-gradient flex items-center justify-center">
+
+    <div class="max-w-3xl w-full">
+        <!-- Progress Bar -->
+        <div class="mb-12 flex justify-between items-center px-4 relative">
+            <div class="absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
+            <div id="progressLine"
+                class="absolute top-1/2 left-0 h-1 bg-primary-500 -translate-y-1/2 z-0 transition-all duration-500"
+                style="width: 0%"></div>
+
+            <div
+                class="relative z-10 w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold shadow-lg shadow-primary-200">
+                1</div>
+            <div id="stepDot2"
+                class="relative z-10 w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-colors duration-300">
+                2</div>
+            <div id="stepDot3"
+                class="relative z-10 w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-colors duration-300">
+                3</div>
+        </div>
+
+        <form id="onboardingForm" class="glass p-8 md:p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+
+            <!-- Step 1: Basic Info -->
+            <div class="step-card active" id="step1">
+                <h2 class="text-3xl font-display font-bold mb-2">Commençons par le début</h2>
+                <p class="text-slate-500 mb-8">Parlez-nous un peu de vous.</p>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700 ml-1">Âge</label>
+                        <input type="number" id="age" required
+                            class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+                            placeholder="Ex: 25">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-700 ml-1">Profession</label>
+                        <input type="text" id="profession" required
+                            class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+                            placeholder="Ex: Enseignant">
+                    </div>
+                </div>
+
+                <div class="space-y-2 mb-10">
+                    <label class="block text-sm font-semibold text-slate-700 ml-1">Durée des difficultés</label>
+                    <select id="duration" required
+                        class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 outline-none transition-all appearance-none cursor-pointer">
+                        <option value="">Sélectionnez une durée...</option>
+                        <option value="<1 mois">Moins d'un mois</option>
+                        <option value="1-3 mois">1 à 3 mois</option>
+                        <option value="3-6 mois">3 à 6 mois</option>
+                        <option value=">6 mois">Plus de 6 mois</option>
+                    </select>
+                </div>
+
+                <button type="button" id="nextBtn1"
+                    class="w-full py-5 bg-primary-600 text-white rounded-[1.5rem] font-bold hover:bg-primary-700 transition-all shadow-xl shadow-primary-100 flex items-center justify-center gap-2">
+                    Continuer
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Step 2: Symptoms -->
+            <div class="step-card" id="step2">
+                <h2 class="text-3xl font-display font-bold mb-2">Vos symptômes</h2>
+                <p class="text-slate-500 mb-8">Quels sont les signes que vous observez ?</p>
+
+                <div class="space-y-4 mb-10">
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="voix_rauque"
+                            class="symptom w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700">Voix rauque / enrouée</span>
+                    </label>
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="fatigue_vocale"
+                            class="symptom w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700">Fatigue vocale rapide</span>
+                    </label>
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="perte_volume"
+                            class="symptom w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700">Perte de volume sonore</span>
+                    </label>
+                </div>
+
+                <div class="space-y-4 mb-12">
+                    <div class="flex justify-between items-center">
+                        <label class="block text-sm font-semibold text-slate-700 ml-1">Intensité ressentie</label>
+                        <span id="severityLabel"
+                            class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-bold">Modérée
+                            (5/10)</span>
+                    </div>
+                    <input type="range" id="severity" min="1" max="10" value="5">
+                    <div
+                        class="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-widest px-1">
+                        <span>Léger</span><span>Sévère</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button" id="prevBtn2"
+                        class="py-5 bg-slate-100 text-slate-600 rounded-[1.5rem] font-bold hover:bg-slate-200 transition-all">Retour</button>
+                    <button type="button" id="nextBtn2"
+                        class="py-5 bg-primary-600 text-white rounded-[1.5rem] font-bold hover:bg-primary-700 transition-all shadow-xl shadow-primary-100">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Goals -->
+            <div class="step-card" id="step3">
+                <h2 class="text-3xl font-display font-bold mb-2">Vos objectifs</h2>
+                <p class="text-slate-500 mb-8">Que souhaitez-vous accomplir ?</p>
+
+                <div class="space-y-4 mb-10">
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="retour_travail"
+                            class="goal w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700 text-sm">Retour au travail serein</span>
+                    </label>
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="amelioration_qualite"
+                            class="goal w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700 text-sm">Amélioration de la qualité vocale</span>
+                    </label>
+                    <label
+                        class="flex items-center p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-primary-500 transition-all group">
+                        <input type="checkbox" value="confort_parole"
+                            class="goal w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-4 font-medium text-slate-700 text-sm">Confort à la parole quotidienne</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <button type="submit"
+                        class="w-full py-5 bg-gradient-to-r from-primary-600 to-accent text-white rounded-[1.5rem] font-bold hover:opacity-90 transition-all shadow-xl shadow-primary-100">
+                        Terminer l'inscription
+                    </button>
+                    <button type="button" id="prevBtn3"
+                        class="text-slate-400 text-sm font-medium hover:text-slate-600 text-center">Retour</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // --- CONFIGURATION FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDcFIFS6-uhHlxtlZUUrnWZerQr84NlIGs",
+            authDomain: "dysphono.firebaseapp.com",
+            projectId: "dysphono",
+            storageBucket: "dysphono.firebasestorage.app",
+            messagingSenderId: "420960702605",
+            appId: "1:420960702605:web:2c5ba910bb93789b5c92c4"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Check Auth
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = 'login.html';
+        });
+
+        // --- UI LOGIC ---
+        lucide.createIcons();
+
+        function updateSeverityLabel(val) {
+            const label = document.getElementById('severityLabel');
+            let text = "Léger";
+            if (val > 3) text = "Modéré";
+            if (val > 7) text = "Sévère";
+            label.innerText = `${text} (${val}/10)`;
+        }
+        
+        document.getElementById('severity').oninput = (e) => updateSeverityLabel(e.target.value);
+
+        function nextStep(step) {
+            if (step > 1) {
+                const prevStep = step - 1;
+                if (prevStep === 1) {
+                    const age = document.getElementById('age').value;
+                    const profession = document.getElementById('profession').value;
+                    const duration = document.getElementById('duration').value;
+                    if (!age || !profession || !duration) {
+                        alert("Veuillez remplir tous les champs.");
+                        return;
+                    }
+                }
+            }
+
+            document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+
+            const progress = (step - 1) * 50;
+            document.getElementById('progressLine').style.width = `${progress}%`;
+
+            for (let i = 2; i <= 3; i++) {
+                const dot = document.getElementById(`stepDot${i}`);
+                if (step >= i) {
+                    dot.classList.add('bg-primary-600', 'text-white');
+                    dot.classList.remove('bg-slate-200', 'text-slate-500');
+                } else {
+                    dot.classList.remove('bg-primary-600', 'text-white');
+                    dot.classList.add('bg-slate-200', 'text-slate-500');
+                }
+            }
+
+            gsap.from(`#step${step}`, { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.out" });
+        }
+        
+        document.getElementById('nextBtn1').onclick = () => nextStep(2);
+        document.getElementById('nextBtn2').onclick = () => nextStep(3);
+        document.getElementById('prevBtn2').onclick = () => nextStep(1);
+        document.getElementById('prevBtn3').onclick = () => nextStep(2);
+
+        // --- SUBMIT LOGIC ---
+        document.getElementById('onboardingForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const symptoms = Array.from(document.querySelectorAll('.symptom:checked')).map(cb => cb.value);
+            const goals = Array.from(document.querySelectorAll('.goal:checked')).map(cb => cb.value);
+
+            const onboardingData = {
+                uid: user.uid,
+                email: user.email,
+                age: document.getElementById('age').value,
+                profession: document.getElementById('profession').value,
+                duration: document.getElementById('duration').value,
+                symptoms: symptoms,
+                severity: document.getElementById('severity').value,
+                goals: goals,
+                onboardingCompleted: true,
+                completedAt: new Date().toISOString()
+            };
+
+            try {
+                await setDoc(doc(db, "users", user.uid), onboardingData, { merge: true });
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                alert('Erreur lors de la sauvegarde : ' + error.message);
+            }
+        };
+    </script>
+</body>
+
+</html>

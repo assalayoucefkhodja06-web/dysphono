@@ -143,33 +143,48 @@
                 </div>
 
                 <!-- Form -->
-                <form id="authForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1.5 ml-1">Email</label>
-                        <input type="email" id="email" required
-                            class="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                            placeholder="nom@exemple.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1.5 ml-1">Mot de passe</label>
-                        <input type="password" id="password" required
-                            class="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                            placeholder="••••••••">
-                    </div>
-                    <button type="submit" id="submitBtn"
-                        class="w-full py-4 bg-primary-600 text-white rounded-2xl font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 flex items-center justify-center gap-2">
-                        Se connecter
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-                </form>
+               <form id="loginForm" class="space-y-5">
+    <div>
+        <label for="email" class="block text-sm font-semibold text-slate-700 mb-2 ml-1">Adresse email</label>
+        <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i data-lucide="mail" class="w-5 h-5 text-slate-400 group-focus-within:text-primary-500 transition-colors"></i>
             </div>
-
-            <p class="mt-8 text-center text-sm text-slate-500">
-                <span id="toggleText">Pas encore de compte ?</span>
-                <button id="toggleAuth" class="text-primary-600 font-semibold hover:underline ml-1">S'inscrire</button>
-            </p>
+            <input type="email" id="email" required
+                class="block w-full pl-11 pr-4 py-3.5 bg-white/50 border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all outline-none"
+                placeholder="nom@exemple.com">
         </div>
+    </div>
 
+    <div>
+        <div class="flex justify-between mb-2 ml-1">
+            <label for="password" class="block text-sm font-semibold text-slate-700">Mot de passe</label>
+            <a href="#" class="text-xs font-bold text-primary-600 hover:text-primary-700">Oublié ?</a>
+        </div>
+        <div class="relative group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i data-lucide="lock" class="w-5 h-5 text-slate-400 group-focus-within:text-primary-500 transition-colors"></i>
+            </div>
+            <input type="password" id="password" required
+                class="block w-full pl-11 pr-12 py-3.5 bg-white/50 border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all outline-none"
+                placeholder="••••••••">
+            <button type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors" id="togglePassword">
+                <i data-lucide="eye" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex items-center ml-1">
+        <input type="checkbox" id="remember" class="w-4 h-4 text-primary-600 border-slate-300 rounded focus:ring-primary-500">
+        <label for="remember" class="ml-2 text-sm text-slate-600">Se souvenir de moi</label>
+    </div>
+
+    <button type="submit" 
+        class="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 active:scale-[0.98] transition-all shadow-xl shadow-slate-200 mt-2 flex items-center justify-center gap-2 group">
+        Se connecter
+        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+    </button>
+</form>
         <!-- Back to Home -->
         <div class="mt-8 text-center">
             <a href="index.html"

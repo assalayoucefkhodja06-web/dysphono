@@ -319,5 +319,25 @@
             }
         });
     </script>
-</body>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDCfIFS6-uhHlxtlZUUrnWZerQr84NlIGs",
+  authDomain: "dysphono.firebaseapp.com",
+  projectId: "dysphono",
+  storageBucket: "dysphono.firebasestorage.app",
+  messagingSenderId: "420960702605",
+  appId: "1:420960702605:web:7951f3ad8922f9bf5c92c4",
+  measurementId: "G-PW554Q84MQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);</body>
 </html>

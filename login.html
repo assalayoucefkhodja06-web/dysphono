@@ -316,6 +316,78 @@
             }
         };
     </script>
-</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDcFIFS6-uhHlxtlZUUrnWZerQr84NlIGs",
+        authDomain: "dysphono.firebaseapp.com",
+        projectId: "dysphono",
+        storageBucket: "dysphono.firebasestorage.app",
+        messagingSenderId: "420960702605",
+        appId: "1:420960702605:web:2c5ba910bb93789b5c92c4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+
+    // Afficher/masquer le mot de passe
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        const icon = togglePassword.querySelector('i');
+        if (icon) {
+            icon.setAttribute('data-lucide', type === 'password' ? 'eye' : 'eye-off');
+            lucide.createIcons();
+        }
+    });
+
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        // Désactiver le bouton pendant la connexion
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="spinner-border animate-spin w-5 h-5 border-2 border-white rounded-full border-t-transparent"></div> Connexion...';
+        submitBtn.disabled = true;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            // Redirection vers le tableau de bord
+            window.location.href = 'dashboard.html';
+        } catch (error) {
+            let message = 'Erreur de connexion.';
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    message = 'Aucun utilisateur trouvé avec cet email.';
+                    break;
+                case 'auth/wrong-password':
+                    message = 'Mot de passe incorrect.';
+                    break;
+                case 'auth/invalid-email':
+                    message = 'Email invalide.';
+                    break;
+                default:
+                    message = error.message;
+            }
+            alert(message);
+            // Réactiver le bouton
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Initialiser les icônes Lucide
+    lucide.createIcons();
+</script>
+        </body>
 
 </html>
